@@ -17,6 +17,8 @@ cursor = connecting.cursor ( )
 #print('Conexão bem sucedida!')
 print('Seja bem vindo à nossa base de dados ! Vamos começar ?')
 
+
+# CREATE
 cadastro_em_andamento = True
 nome = input ( 'Informe seu nome: ' )
 idade = input ( 'Informe sua idade: ' )
@@ -45,14 +47,24 @@ while cadastro_em_andamento:
 else :
     print ( 'Não foi possível completar o seu cadastro! Por favor entre em contato com Nick Fury! ' )
 
-
-# CREATE
 def create_user ( nome , idade , altura , genero , profissao ) :
     cursor.execute ( "INSERT INTO usuarios (nome,idade,altura,genero,profissao) VALUES (%s, %s,%s,%s,%s);" ,
                      (nome , idade , altura , genero , profissao) )
 
 
 create_user ( f'{nome}' , f'{idade}' , f'{altura}' , f'{genero}' , f'{profissao}' )
+
+#-------------------------------------------------------------------------------------------------------------------#
+
+# READ
+def read_user():
+    cursor.execute("SELECT * FROM usuarios")
+    return cursor.fetchall()
+
+mostrar_todos = read_user()
+print(mostrar_todos)
+
+#-------------------------------------------------------------------------------------------------------------------#
 
 connecting.commit ( )
 cursor.close ( )
