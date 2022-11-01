@@ -17,6 +17,7 @@ cursor = connecting.cursor ( )
 # print('Conexão bem sucedida!')
 print ( 'Seja bem vindo à nossa base de dados ! Vamos começar ?' )
 
+#--------------------------------------------------------------------------------------------------------------------
 # CREATE
 cadastro_em_andamento = True
 nome = input ( 'Informe seu nome: ' )
@@ -52,20 +53,42 @@ def create_user ( nome , idade , altura , genero , profissao ) :
 
 
 create_user ( f'{nome}' , f'{idade}' , f'{altura}' , f'{genero}' , f'{profissao}' )
+#----------------------------------------------------------------------------------------------------------------------
 
-#-------------------------------------------------------------------------------------------------------------------#
+# FIND ALL
 
-# READ
+gerando_busca = True
+listar_todos = input("Deseja listar todos os usuários ? Y/N :  ")
 def find_all():
     cursor.execute("SELECT * FROM usuarios")
-    return cursor.fetchall()
+    if listar_todos == 'Y':
+        return cursor.fetchall ( )
+        print ( "Esses são todos os usuários da sua base!" )
 
-buscar_todos = find_all()
-print(buscar_todos)
+    if listar_todos == 'N' :
+        print("Você escolheu não listar os usuários!")
+    else:
+        print("Erro ao buscar usuários! Verifique se a resposta corresponde com as opções sugeridas!")
+
+buscar_todos = find_all ( )
+print ( buscar_todos )
 
 
-#-------------------------------------------------------------------------------------------------------------------#
-#READ
+#----------------------------------------------------------------------------------------------------------------------
+#FIND ONE
+busca_em_andamento= True
+id_usuario = int(input("Qual pin do usuário que deseja encontrar? "))
+
+
+while busca_em_andamento:
+    busca_completa= False
+    if id_usuario:
+        id_usuario
+        busca_em_andamento = False
+    busca_completa= True
+    print("Usuário encontrado com sucesso!")
+
+
 def find_one(id):
     cursor.execute("SELECT * FROM usuarios WHERE id=%s ;", (id, ))
     return cursor.fetchall()
@@ -75,9 +98,8 @@ print(buscar_um)
 
 
 
-# -------------------------------------------------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------------------------------------------------
 # UPDATE
-
 atualizacao_andamento = True
 id_usuario = int(input("Informe o pin que deseja alterar os dados: "))
 nome = input ( 'Informe seu nome: ' )
@@ -115,8 +137,7 @@ def update_user ( id , nome , idade , altura , genero , profissao ) :
 
 update_user ( f'{id_usuario}' , f'{nome}' , f'{idade}' , f'{altura}' , f'{genero}' , f'{profissao}' )
 
-
-# -------------------------------------------------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------------------------------------------------
 
 connecting.commit ( )
 cursor.close ( )
