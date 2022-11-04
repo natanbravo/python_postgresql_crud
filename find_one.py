@@ -1,23 +1,5 @@
 import psycopg2
-
-# DADOS DE CONEXÃO
-host = "localhost"
-dbname = "postgres"
-user = "postgres"
-password = "postgres"
-sslmode = "require"
-
-# CRIANDO CONEXÃO COM O BANCO
-
-db_connection = "host={0} dbname={1} user={2} password={3} sslmode={4}".format(host,dbname,user,password,
-                                                                               sslmode)
-connecting = psycopg2.connect(db_connection)
-
-cursor = connecting.cursor()
-# print('Conexão bem sucedida!')
-print('Seja bem vindo à nossa base de dados ! Vamos começar ?')
-
-# ----------------------------------------------------------------------------------------------------------------------
+import modulo
 
 # FIND ONE
 busca_em_andamento = True
@@ -33,15 +15,13 @@ while busca_em_andamento:
 
 
 def find_one(id):
-    cursor.execute("SELECT * FROM usuarios WHERE id=%s ;",(id,))
-    return cursor.fetchall()
+    modulo.cursor.execute("SELECT * FROM usuarios WHERE id=%s ;", (id,))
+    return modulo.cursor.fetchall()
 
 
 buscar_um = find_one(id_usuario)
 print(buscar_um)
-# ----------------------------------------------------------------------------------------------------------------------
 
-
-connecting.commit()
-cursor.close()
-connecting.close()
+modulo.connecting.commit()
+modulo.cursor.close()
+modulo.connecting.close()
