@@ -9,6 +9,7 @@
 
 Para rodar esse projeto digite o seguinte comando no seu terminal:
 ```bash
+pip install psycopg2
 pip install psycopg2-binary
 ```
     
